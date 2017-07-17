@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WikiService } from './services/wiki.service'
 import swal from 'sweetalert2';
 
 declare var filestack: any;
@@ -20,7 +21,7 @@ export class AppComponent {
   create_or_re_choose: any;
   choose_or_re_choose: any;
 
-  constructor() {
+  constructor(private wikiService: WikiService) {
     this.title = 'app';
     this.client = filestack.init('AxGm6Nb8rTPyGLzI0VcuEz')
     this.marker_url = 'assets/landscape_filler.jpg';
