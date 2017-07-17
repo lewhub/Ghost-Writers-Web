@@ -1,0 +1,47 @@
+<style>
+  .upload-btn-div {
+    display: flex;
+    margin: 25px;
+  }
+  .upload-btn-div a {
+    margin: auto;
+    
+  }
+</style>
+<div class="row">
+  <div class="col s12 m7">
+    <div class="card">
+      <div class="card-image">
+        <img class='marker-photo' src="{{marker_url}}">
+        <span class="card-title">{{marker_filename}}</span>
+      </div>
+      <div class="card-content">
+        <p>Create a marker to be reconized by our image recognition software.</p>
+      </div>
+      <div class="card-action">
+        <a (click)='createMarker()' class='waves-effect waves-light btn blue lighten-3'>{{create_or_re_choose}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m7">
+    <div class="card">
+      <div class="card-image">
+        <img class='added-art' src="{{added_art_url}}">
+        <span class="card-title">{{added_art_filename}}</span>
+      </div>
+      <div class="card-content">
+        <p>Add a photo onto this marker.</p>
+      </div>
+      <div class="card-action">
+        <a (click)='createArt()' class='waves-effect waves-light btn blue lighten-3'>{{choose_or_re_choose}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class='upload-btn-div'>
+  <a (click)='saveClicked()' class='waves-effect waves-light btn blue lighten-3'>Upload &amp; Save</a>
+</div>
