@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WikiService } from './services/wiki.service'
 import swal from 'sweetalert2';
 
@@ -12,6 +12,8 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  current_latitude: any;
+  current_longitude: any;
   title: string;
   client: any;
   marker_url: any;
@@ -38,6 +40,18 @@ export class AppComponent {
       this.marker_filename = result.filesUploaded[0].filename;
       this.create_or_re_choose = 'Take Another Photo'
     })
+    console.log('hello')
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+        console.log('success getting position = ', position)
+          this.current_latitude = position.coords.latitude;
+          this.current_longitude = position.coords.longitude;
+          console.log('lat: ' + this.current_latitude + ' long: ' + this.current_longitude);
+        },
+        (err) => console.log('fail getting position = ', err)
+      )
+    }
   }
 
   createArt() {
