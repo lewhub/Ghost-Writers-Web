@@ -10,7 +10,7 @@ import 'rxjs/Rx';
     TC_ID: string = '5963b498f67e6315b7658a2a';
     baseUrl: string = 'https://api.wikitude.com';
     path_add_get_target:string = '/cloudRecognition/targetCollection/' + this.TC_ID + '/target/';
-    path_generate_TC: string = '/cloudRecognition/targetCollection/' + this.TC_ID + '/generation/cloudarchive';
+    path_generate_TC: string = '/cloudRecognition/targetCollection/' + this.TC_ID + '/generation/wtc';
     headers: any = new Headers({
         'Content-Type': 'application/json',
 	    'X-Token': 'fe087579ece1518a3a67dae3021888c7',
@@ -18,7 +18,7 @@ import 'rxjs/Rx';
       });
 
     constructor(private http: Http) {
-    
+      
     }
     
     getAllTargets() {
@@ -26,11 +26,15 @@ import 'rxjs/Rx';
       return this.http.get(this.baseUrl + this.path_add_get_target, { headers: this.headers})
         .map((res) => res.json());
     }
-
+    // {name: 'name of target', imageUrl: 'filestack'}
     addTarget(target) {
         let body = JSON.stringify(target);
+        console.log(body, 'target info')
         return this.http.post(this.baseUrl + this.path_add_get_target, body, { headers: this.headers })
-          .map((res) => res.json());
+          .map((res) => {
+            // console.log(res, 'res from server')
+            res.json()
+          });
     }
     
     deleteTarget(targetId) {
@@ -44,8 +48,12 @@ import 'rxjs/Rx';
     }
 
     generateTargetCollection() {
-        return this.http.get(this.baseUrl + this.path_generate_TC, { headers: this.headers })
-          .map((res) => res.json());
+      console.log(this.baseUrl + this.path_generate_TC, 'url to send');
+        return this.http.post(this.baseUrl + this.path_generate_TC, {}, { headers: this.headers })
+          .map((res) => {
+            // console.log(res)
+            res.json()
+          } );
     }
   }
 
