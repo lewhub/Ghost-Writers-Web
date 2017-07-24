@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
           console.log(err, 'error happended')
           swal({
             title: 'Error:',
-            text: err,
+            text: err.error,
             timer: 5000
           })
         })
