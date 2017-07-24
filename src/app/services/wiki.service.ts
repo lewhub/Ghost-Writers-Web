@@ -49,7 +49,7 @@ import 'rxjs/Rx';
 
     generateTargetCollection() {
       console.log(this.baseUrl + this.path_generate_TC, 'url to send');
-        return this.http.post(this.baseUrl + this.path_generate_TC, {}, { headers: this.headers })
+        return this.http.post(this.baseUrl + this.path_generate_TC, { sdkVersion: "6.0" }, { headers: this.headers })
           .map((res) => {
             // console.log(res)
             res.json()
