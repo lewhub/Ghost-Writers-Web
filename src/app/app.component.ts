@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WikiService } from './services/wiki.service'
+import { HttpClient } from '@angular/common/http';
 import swal from 'sweetalert2';
 
 declare var filestack: any;
@@ -9,9 +10,10 @@ declare var $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [WikiService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string;
   client: any;
   marker_url: any;
@@ -21,7 +23,7 @@ export class AppComponent {
   create_or_re_choose: any;
   choose_or_re_choose: any;
 
-  constructor(private wikiService: WikiService) {
+  constructor(private wikiService: WikiService, private http: HttpClient) {
     this.title = 'app';
     this.client = filestack.init('AxGm6Nb8rTPyGLzI0VcuEz')
     this.marker_url = 'assets/landscape_filler.jpg';
@@ -31,13 +33,38 @@ export class AppComponent {
   }
 
   createMarker() {
-    this.client.pick({fromSources: ['local_file_system', 'webcam']}).then((result) => {
+    this.client.pick({ fromSources: ['local_file_system', 'webcam'] }).then((result) => {
       console.log(result, 'success')
       console.log(result.filesUploaded[0].url)
       this.marker_url = result.filesUploaded[0].url;
       this.marker_filename = result.filesUploaded[0].filename;
       this.create_or_re_choose = 'Take Another Photo'
+
+      this.http
+        .post('http://52.15.90.163:3002/api/marker/markers/597256f44dd765ce12f0cbc0', {image_url: this.marker_url})
+        .subscribe((res) => {
+          console.log(res, 'successfully created marker to mongo db...')
+        })
+
+      this.wikiService.addTarget({ name: 'test-target-name', imageUrl: this.marker_url }).subscribe(data => {
+        console.log(data, '< data from server')
+      }, err => {
+        console.log(err, '< err happended')
+      })
+      
+      this.wikiService.generateTargetCollection().subscribe(data => {
+        console.log(data, 'successful')
+      }, err => {
+        console.log(err, 'error')
+      })
     })
+
+    
+
+  }
+
+  ngOnInit() {
+    console.log('in ng on init');
   }
 
   createArt() {
@@ -46,6 +73,16 @@ export class AppComponent {
       this.added_art_url = result.filesUploaded[0].url;
       this.added_art_filename = result.filesUploaded[0].filename;
       this.choose_or_re_choose = 'Choose a different photo';
+      let art_meta = {
+        marker_id: '59725bb0286298d08bf1b688',
+        photo_url: this.added_art_url,
+        title: this.added_art_filename
+      };
+      this.http
+        .post('http://52.15.90.163:3002/api/art/597256f44dd765ce12f0cbc0', art_meta)
+        .subscribe((res) => {
+          console.log(res, 'successfully added art to marker...')
+        })
     })
   }
 
