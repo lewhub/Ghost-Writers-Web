@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { WikiService } from './services/wiki.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import {WebStorageModule, LocalStorageService} from "angular2-localstorage";
 
 import { AppComponent } from './app.component';
 
@@ -13,9 +14,10 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    WebStorageModule
   ],
-  providers: [WikiService],
+  providers: [WikiService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

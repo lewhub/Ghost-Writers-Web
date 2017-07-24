@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WikiService } from './services/wiki.service'
 import { HttpClient } from '@angular/common/http';
+import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 import swal from 'sweetalert2';
+
 
 declare var filestack: any;
 declare var $: any;
@@ -16,6 +18,7 @@ declare var $: any;
 
 
 export class AppComponent implements OnInit {
+  @LocalStorage() public current_user:string = '';
   current_latitude: any;
   current_longitude: any;
   title: string;
@@ -69,11 +72,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('in ng on init');
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        console.log('lat =' + position.coords.latitude)
-        console.log('long =' + position.coords.longitude)
-      })
+    console.log(this.current_user, '<< localStorage current user')
+    // navigator.geolocation.getCurrentPosition(
+    //   function (position) {
+    //     console.log('lat =' + position.coords.latitude)
+    //     console.log('long =' + position.coords.longitude)
+    //   })
   }
 
   createArt() {
