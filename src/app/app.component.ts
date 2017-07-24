@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   marker_target_id: any;
   res_obj: any;
 
+
   constructor(private wikiService: WikiService, private http: HttpClient) {
     this.title = 'app';
     this.client = filestack.init('AxGm6Nb8rTPyGLzI0VcuEz')
@@ -46,32 +47,7 @@ export class AppComponent implements OnInit {
       this.marker_filename = result.filesUploaded[0].filename;
       this.create_or_re_choose = 'Take Another Photo'
 
-      this.http
-        .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
-        .subscribe((res) => {
-          console.log(res, 'successfully created marker to mongo db...');
-          // adding marker to wikitude manager
-          this.res_obj = res;
-          this.marker_target_id = this.res_obj.marker._id;
-          this.wikiService.addTarget({ name: this.marker_target_id, imageUrl: this.marker_url }).subscribe(data => {
-            console.log(data, '< data from server for marker in wikitude')
-          }, err => {
-            console.log(err, '< err happended')
-          })
-          // regenerating the target collection
-          this.wikiService.generateTargetCollection().subscribe(data => {
-            console.log(data, 'successful')
-          }, err => {
-            console.log(err, 'error')
-          })
-        }, (err) => {
-          console.log(err, 'error happended')
-          swal({
-            title: 'Error:',
-            text: JSON.stringify(err),
-            timer: 20000
-          })
-        })
+
 
 
 
@@ -105,16 +81,7 @@ export class AppComponent implements OnInit {
       this.added_art_url = result.filesUploaded[0].url;
       this.added_art_filename = result.filesUploaded[0].filename;
       this.choose_or_re_choose = 'Choose a different photo';
-      let art_meta = {
-        marker_id: this.marker_target_id,
-        photo_url: this.added_art_url,
-        title: this.added_art_filename
-      };
-      this.http
-        .post('http://52.15.90.163:3002/api/art/59763273fc3f94fa9efa98f2', art_meta)
-        .subscribe((res) => {
-          console.log(res, 'successfully added art to marker...')
-        })
+
     })
   }
 
@@ -128,6 +95,51 @@ export class AppComponent implements OnInit {
     } else {
       console.log('beginning upload...');
       console.log({ marker: this.marker_url, added_art: this.added_art_url });
+      this.http
+        .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
+        .subscribe((res) => {
+          console.log(res, 'successfully created marker to mongo db...');
+          // adding marker to wikitude manager
+          this.res_obj = res;
+          this.marker_target_id = this.res_obj.marker._id;
+          this.wikiService.addTarget({ name: this.marker_target_id, imageUrl: this.marker_url }).subscribe(data => {
+            console.log(data, '< data from server for marker in wikitude')
+
+            // adding art
+            let art_meta = {
+              marker_id: this.marker_target_id,
+              photo_url: this.added_art_url,
+              title: this.added_art_filename
+            };
+            this.http
+              .post('http://52.15.90.163:3002/api/art/59763273fc3f94fa9efa98f2', art_meta)
+              .subscribe((res) => {
+                console.log(res, 'successfully added art to marker...')
+                swal({
+                  title: 'Saved!!',
+                  text: 'marker and art was uploaded and saved!',
+                  timer: 5000
+                })
+                // regenerating the target collection
+                this.wikiService.generateTargetCollection().subscribe(data => {
+                  console.log(data, 'successful')
+                }, err => {
+                  console.log(err, 'error')
+                })
+              })
+
+          }, err => {
+            console.log(err, '< err happended')
+          })
+
+        }, (err) => {
+          console.log(err, 'error happended')
+          swal({
+            title: 'Error:',
+            text: JSON.stringify(err),
+            timer: 20000
+          })
+        })
     }
 
   }
