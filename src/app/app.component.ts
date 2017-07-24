@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       this.create_or_re_choose = 'Take Another Photo'
 
       this.http
-        .post('https://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
+        .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...')
         }, (err) => {
