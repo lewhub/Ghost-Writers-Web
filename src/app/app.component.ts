@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   create_or_re_choose: any;
   choose_or_re_choose: any;
   marker_target_id: any;
+  res_obj: any;
 
   constructor(private wikiService: WikiService, private http: HttpClient) {
     this.title = 'app';
@@ -50,7 +51,8 @@ export class AppComponent implements OnInit {
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...');
           // adding marker to wikitude manager
-          this.marker_target_id = res.marker._id;
+          this.res_obj = res;
+          this.marker_target_id = this.res_obj.marker._id;
           this.wikiService.addTarget({ name: this.marker_target_id, imageUrl: this.marker_url }).subscribe(data => {
             console.log(data, '< data from server for marker in wikitude')
           }, err => {
