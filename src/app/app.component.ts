@@ -48,6 +48,13 @@ export class AppComponent implements OnInit {
         .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...')
+        }, (err) => {
+          console.log(err, 'error happended')
+          swal({
+            title: 'Error:',
+            text: err,
+            timer: 5000
+          })
         })
 
       this.wikiService.addTarget({ name: this.marker_filename, imageUrl: this.marker_url }).subscribe(data => {
@@ -55,7 +62,7 @@ export class AppComponent implements OnInit {
       }, err => {
         console.log(err, '< err happended')
       })
-      
+
 
       this.wikiService.generateTargetCollection().subscribe(data => {
         console.log(data, 'successful')
