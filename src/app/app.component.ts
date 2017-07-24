@@ -106,12 +106,12 @@ export class AppComponent implements OnInit {
       this.added_art_filename = result.filesUploaded[0].filename;
       this.choose_or_re_choose = 'Choose a different photo';
       let art_meta = {
-        marker_id: '59725bb0286298d08bf1b688',
+        marker_id: this.marker_target_id,
         photo_url: this.added_art_url,
         title: this.added_art_filename
       };
       this.http
-        .post('http://52.15.90.163:3002/api/art/' + this.marker_target_id, art_meta)
+        .post('http://52.15.90.163:3002/api/art/59763273fc3f94fa9efa98f2', art_meta)
         .subscribe((res) => {
           console.log(res, 'successfully added art to marker...')
         })
