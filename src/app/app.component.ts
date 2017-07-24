@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WikiService } from './services/wiki.service'
 import { HttpClient } from '@angular/common/http';
-import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 import swal from 'sweetalert2';
+// import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 
 
 declare var filestack: any;
@@ -18,7 +18,7 @@ declare var $: any;
 
 
 export class AppComponent implements OnInit {
-  @LocalStorage() public current_user:string = '';
+  // @LocalStorage() public current_user:string = '';
   current_latitude: any;
   current_longitude: any;
   title: string;
@@ -72,7 +72,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('in ng on init');
-    console.log(this.current_user, '<< localStorage current user')
+    localStorage.setItem('test', 'test_true');
+    console.log(localStorage.getItem('test'), '<< test local storage item')
+    console.log(localStorage.getItem('id'));
+    alert(localStorage.getItem('id'))
+    // console.log(this.current_user, '<< localStorage current user')
     // navigator.geolocation.getCurrentPosition(
     //   function (position) {
     //     console.log('lat =' + position.coords.latitude)
