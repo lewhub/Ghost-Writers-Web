@@ -13,7 +13,9 @@ declare var $: any;
   styleUrls: ['./app.component.css'],
   providers: [WikiService]
 })
-export class AppComponent {
+
+
+export class AppComponent implements OnInit {
   current_latitude: any;
   current_longitude: any;
   title: string;
@@ -43,7 +45,7 @@ export class AppComponent {
       this.create_or_re_choose = 'Take Another Photo'
 
       this.http
-        .post('http://52.15.90.163:3002/api/marker/markers/597256f44dd765ce12f0cbc0', {image_url: this.marker_url})
+        .post('http://52.15.90.163:3002/api/marker/markers/597256f44dd765ce12f0cbc0', { image_url: this.marker_url })
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...')
         })
@@ -54,6 +56,7 @@ export class AppComponent {
         console.log(err, '< err happended')
       })
       
+
       this.wikiService.generateTargetCollection().subscribe(data => {
         console.log(data, 'successful')
       }, err => {
@@ -61,10 +64,10 @@ export class AppComponent {
       })
     })
     console.log('hello')
-    if(navigator.geolocation) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-        console.log('success getting position = ', position)
+          console.log('success getting position = ', position)
           this.current_latitude = position.coords.latitude;
           this.current_longitude = position.coords.longitude;
           console.log('lat: ' + this.current_latitude + ' long: ' + this.current_longitude);
@@ -72,6 +75,13 @@ export class AppComponent {
         (err) => console.log('fail getting position = ', err)
       )
     }
+
+
+
+  }
+
+  ngOnInit() {
+    console.log('in ng on init');
   }
 
   createArt() {
