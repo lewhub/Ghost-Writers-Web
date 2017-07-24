@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
           console.log(res, 'successfully created marker to mongo db...')
         })
 
-      this.wikiService.addTarget({ name: 'test-target-name', imageUrl: this.marker_url }).subscribe(data => {
+      this.wikiService.addTarget({ name: this.marker_filename, imageUrl: this.marker_url }).subscribe(data => {
         console.log(data, '< data from server')
       }, err => {
         console.log(err, '< err happended')
