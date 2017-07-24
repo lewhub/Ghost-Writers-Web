@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
     this.added_art_url = 'assets/pancakes.jpg';
     this.create_or_re_choose = 'Create Marker';
     this.choose_or_re_choose = 'Choose a Photo';
+
   }
 
   createMarker() {
@@ -47,15 +48,10 @@ export class AppComponent implements OnInit {
       this.marker_filename = result.filesUploaded[0].filename;
       this.create_or_re_choose = 'Take Another Photo'
 
-
-
-
-
-
-
     })
     console.log('hello')
     if (navigator.geolocation) {
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
           console.log('success getting position = ', position)
@@ -73,6 +69,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('in ng on init');
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        console.log('lat =' + position.coords.latitude)
+        console.log('long =' + position.coords.longitude)
+      })
   }
 
   createArt() {
