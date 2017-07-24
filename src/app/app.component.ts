@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   added_art_filename: any;
   create_or_re_choose: any;
   choose_or_re_choose: any;
+  marker_target_id: any;
 
   constructor(private wikiService: WikiService, private http: HttpClient) {
     this.title = 'app';
@@ -47,7 +48,20 @@ export class AppComponent implements OnInit {
       this.http
         .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
         .subscribe((res) => {
-          console.log(res, 'successfully created marker to mongo db...')
+          console.log(res, 'successfully created marker to mongo db...');
+          // adding marker to wikitude manager
+          this.marker_target_id = res.marker._id;
+          this.wikiService.addTarget({ name: this.marker_target_id, imageUrl: this.marker_url }).subscribe(data => {
+            console.log(data, '< data from server for marker in wikitude')
+          }, err => {
+            console.log(err, '< err happended')
+          })
+          // regenerating the target collection
+          this.wikiService.generateTargetCollection().subscribe(data => {
+            console.log(data, 'successful')
+          }, err => {
+            console.log(err, 'error')
+          })
         }, (err) => {
           console.log(err, 'error happended')
           swal({
@@ -57,18 +71,10 @@ export class AppComponent implements OnInit {
           })
         })
 
-      this.wikiService.addTarget({ name: this.marker_filename, imageUrl: this.marker_url }).subscribe(data => {
-        console.log(data, '< data from server')
-      }, err => {
-        console.log(err, '< err happended')
-      })
 
 
-      this.wikiService.generateTargetCollection().subscribe(data => {
-        console.log(data, 'successful')
-      }, err => {
-        console.log(err, 'error')
-      })
+
+
     })
     console.log('hello')
     if (navigator.geolocation) {
@@ -103,7 +109,7 @@ export class AppComponent implements OnInit {
         title: this.added_art_filename
       };
       this.http
-        .post('http://52.15.90.163:3002/api/art/597256f44dd765ce12f0cbc0', art_meta)
+        .post('http://52.15.90.163:3002/api/art/' + this.marker_target_id, art_meta)
         .subscribe((res) => {
           console.log(res, 'successfully added art to marker...')
         })
