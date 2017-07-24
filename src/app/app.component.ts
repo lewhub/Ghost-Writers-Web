@@ -45,12 +45,12 @@ export class AppComponent implements OnInit {
       this.create_or_re_choose = 'Take Another Photo'
 
       this.http
-        .post('http://52.15.90.163:3002/api/marker/markers/597256f44dd765ce12f0cbc0', { image_url: this.marker_url })
+        .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...')
         })
 
-      this.wikiService.addTarget({ name: this.marker_filename, imageUrl: this.marker_url }).subscribe(data => {
+      this.wikiService.addTarget({ name: this.marker_filename, imageUrl: this.marker_url, sdkVersion: "6.0" }).subscribe(data => {
         console.log(data, '< data from server')
       }, err => {
         console.log(err, '< err happended')
