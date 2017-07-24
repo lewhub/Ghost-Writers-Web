@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
           swal({
             title: 'Error:',
             text: JSON.stringify(err),
-            timer: 5000
+            timer: 20000
           })
         })
 
