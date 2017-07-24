@@ -75,7 +75,9 @@ export class AppComponent implements OnInit {
     localStorage.setItem('test', 'test_true');
     console.log(localStorage.getItem('test'), '<< test local storage item')
     console.log(localStorage.getItem('id'));
+    alert(JSON.stringify(localStorage))
     alert(localStorage.getItem('id'))
+    
     // console.log(this.current_user, '<< localStorage current user')
     // navigator.geolocation.getCurrentPosition(
     //   function (position) {
