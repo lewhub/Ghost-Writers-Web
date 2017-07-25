@@ -79,6 +79,10 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('storage_test_two')
     // localStorage.removeItem('test')
 
+    console.log(document.getElementById('test-el'))
+
+    alert(document.getElementById('test-el'))
+
     // console.log(localStorage.getItem('test'), '<< test local storage item')
     alert(JSON.stringify(localStorage))
     // alert(localStorage.getItem('id'))
