@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
 
     console.log(document.getElementById('test-el'))
 
-    alert(document.getElementById('test-el'))
+    alert(JSON.stringify(document.getElementById('test-el')))
 
     // console.log(localStorage.getItem('test'), '<< test local storage item')
     alert(JSON.stringify(localStorage))
