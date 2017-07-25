@@ -73,10 +73,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.log('in ng on init');
     localStorage.setItem('test', 'test_true');
-    console.log(localStorage.getItem('test'), '<< test local storage item')
-    console.log(localStorage.getItem('id'));
+    // console.log(localStorage.getItem('test'), '<< test local storage item')
     alert(JSON.stringify(localStorage))
-    alert(localStorage.getItem('id'))
+    // alert(localStorage.getItem('id'))
     
     // console.log(this.current_user, '<< localStorage current user')
     // navigator.geolocation.getCurrentPosition(
