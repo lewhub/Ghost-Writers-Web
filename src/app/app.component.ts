@@ -74,6 +74,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.log('in ng on init');
     localStorage.setItem('test', 'test_true');
+    localStorage.removeItem('name')
+    localStorage.removeItem('storage_test')
+    localStorage.removeItem('storage_test_two')
+    // localStorage.removeItem('test')
+
     // console.log(localStorage.getItem('test'), '<< test local storage item')
     alert(JSON.stringify(localStorage))
     // alert(localStorage.getItem('id'))
