@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   createMarker() {
+    alert(JSON.stringify(localStorage))
     this.client.pick({ fromSources: ['local_file_system', 'webcam'] }).then((result) => {
       console.log(result, 'success')
       console.log(result.filesUploaded[0].url)
