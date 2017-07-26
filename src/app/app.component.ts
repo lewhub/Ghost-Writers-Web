@@ -58,19 +58,19 @@ export class AppComponent implements OnInit {
       this.create_or_re_choose = 'Take Another Photo'
 
     })
-    console.log('hello')
-    if (navigator.geolocation) {
+    // console.log('hello')
+    // if (navigator.geolocation) {
 
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log('success getting position = ', position)
-          this.current_latitude = position.coords.latitude;
-          this.current_longitude = position.coords.longitude;
-          console.log('lat: ' + this.current_latitude + ' long: ' + this.current_longitude);
-        },
-        (err) => console.log('fail getting position = ', err)
-      )
-    }
+    //   navigator.geolocation.getCurrentPosition(
+    //     (position) => {
+    //       console.log('success getting position = ', position)
+    //       this.current_latitude = position.coords.latitude;
+    //       this.current_longitude = position.coords.longitude;
+    //       console.log('lat: ' + this.current_latitude + ' long: ' + this.current_longitude);
+    //     },
+    //     (err) => console.log('fail getting position = ', err)
+    //   )
+    // }
 
 
 
