@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WikiService } from './services/wiki.service'
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import swal from 'sweetalert2';
+import 'rxjs/add/operator/switchMap';
 // import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
 
 
@@ -31,9 +33,10 @@ export class AppComponent implements OnInit {
   choose_or_re_choose: any;
   marker_target_id: any;
   res_obj: any;
+  current_user: any;
 
 
-  constructor(private wikiService: WikiService, private http: HttpClient) {
+  constructor(private wikiService: WikiService, private http: HttpClient, private route: ActivatedRoute) {
     this.title = 'app';
     this.client = filestack.init('AxGm6Nb8rTPyGLzI0VcuEz')
     this.marker_url = 'assets/landscape_filler.jpg';
@@ -44,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   createMarker() {
-    alert(JSON.stringify(localStorage))
+    alert(this.current_user)
     this.client.pick({ fromSources: ['local_file_system', 'webcam'] }).then((result) => {
       console.log(result, 'success')
       console.log(result.filesUploaded[0].url)
@@ -73,6 +76,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('in ng on init');
+    this.current_user = this.route.paramMap.switchMap((params: ParamMap) => {
+      return params.get('userid')
+    })
+    
     localStorage.setItem('test', 'test_true');
     localStorage.removeItem('name')
     localStorage.removeItem('storage_test')
