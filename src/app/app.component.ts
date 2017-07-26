@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
   marker_target_id: any;
   res_obj: any;
   current_user: any;
+  current_lat: any;
+  current_lng: any;
 
 
   constructor(private wikiService: WikiService, private http: HttpClient) {
@@ -91,7 +93,9 @@ export class AppComponent implements OnInit {
 }
 
     this.current_user = getParameterByName('userid', undefined)
-    
+    this.current_lat = getParameterByName('currlat', undefined)
+    this.current_lng = getParameterByName('currlong', undefined)
+    alert('lat: ' + this.current_lat + '---' + 'lng: ' + this.current_lng);
     localStorage.setItem('test', 'test_true');
     localStorage.removeItem('name')
     localStorage.removeItem('storage_test')
@@ -162,6 +166,7 @@ export class AppComponent implements OnInit {
                 // regenerating the target collection
                 this.wikiService.generateTargetCollection().subscribe(data => {
                   console.log(data, 'successful')
+
                 }, err => {
                   console.log(err, 'error')
                 })
