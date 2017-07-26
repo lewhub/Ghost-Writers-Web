@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
       console.log('beginning upload...');
       console.log({ marker: this.marker_url, added_art: this.added_art_url });
       this.http
-        .post('http://52.15.90.163:3002/api/marker/markers/' + this.current_user, { image_url: this.marker_url })
+        .post('http://52.15.90.163:3002/api/marker/markers/' + this.current_user, { image_url: this.marker_url, latitude:  this.current_lat, longitude: this.current_lng})
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...');
           // adding marker to wikitude manager
