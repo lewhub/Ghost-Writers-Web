@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-    alert(getParameterByName('userid', undefined))
+    this.current_user = getParameterByName('userid', undefined)
     
     localStorage.setItem('test', 'test_true');
     localStorage.removeItem('name')
@@ -135,7 +135,7 @@ export class AppComponent implements OnInit {
       console.log('beginning upload...');
       console.log({ marker: this.marker_url, added_art: this.added_art_url });
       this.http
-        .post('http://52.15.90.163:3002/api/marker/markers/59763273fc3f94fa9efa98f2', { image_url: this.marker_url })
+        .post('http://52.15.90.163:3002/api/marker/markers/' + this.current_user, { image_url: this.marker_url })
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...');
           // adding marker to wikitude manager
@@ -151,7 +151,7 @@ export class AppComponent implements OnInit {
               title: this.added_art_filename
             };
             this.http
-              .post('http://52.15.90.163:3002/api/art/59763273fc3f94fa9efa98f2', art_meta)
+              .post('http://52.15.90.163:3002/api/art/' + this.current_user, art_meta)
               .subscribe((res) => {
                 console.log(res, 'successfully added art to marker...')
                 swal({
