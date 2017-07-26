@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   constructor(private wikiService: WikiService, private http: HttpClient) {
     this.title = 'app';
-    this.client = filestack.init('AxGm6Nb8rTPyGLzI0VcuEz')
+    this.client = filestack.init('AZps2J8u6THaOVGZzieLnz')
     this.marker_url = 'assets/landscape_filler.jpg';
     this.added_art_url = 'assets/pancakes.jpg';
     this.create_or_re_choose = 'Create Marker';
