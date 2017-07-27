@@ -170,6 +170,7 @@ export class AppComponent implements OnInit {
                 }, err => {
                   console.log(err, 'error')
                 })
+                window.location.href = 'http://www.lewisbracey.com'
               })
 
           }, err => {
