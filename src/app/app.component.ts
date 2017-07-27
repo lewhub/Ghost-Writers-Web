@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 
   createMarker() {
     alert(this.current_user)
-    this.client.pick({ fromSources: ['local_file_system', 'webcam'] }).then((result) => {
+    this.client.pick({ fromSources: ['local_file_system', 'webcam'], accept: 'image/*'}).then((result) => {
       console.log(result, 'success')
       console.log(result.filesUploaded[0].url)
       this.marker_url = result.filesUploaded[0].url;
