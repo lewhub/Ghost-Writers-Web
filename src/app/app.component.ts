@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   }
 
   createMarker() {
-    alert(this.current_user)
+    // alert(this.current_user)
     this.client.pick({ fromSources: ['local_file_system', 'webcam'], accept: 'image/*'}).then((result) => {
       console.log(result, 'success')
       console.log(result.filesUploaded[0].url)
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
     this.current_user = getParameterByName('userid', undefined)
     this.current_lat = getParameterByName('currlat', undefined)
     this.current_lng = getParameterByName('currlong', undefined)
-    alert('lat: ' + this.current_lat + '---' + 'lng: ' + this.current_lng);
+    // alert('lat: ' + this.current_lat + '---' + 'lng: ' + this.current_lng);
     localStorage.setItem('test', 'test_true');
     localStorage.removeItem('name')
     localStorage.removeItem('storage_test')
@@ -104,10 +104,10 @@ export class AppComponent implements OnInit {
 
     console.log(document.getElementById('test-el'))
 
-    alert(JSON.stringify(document.getElementById('test-el')))
+    // alert(JSON.stringify(document.getElementById('test-el')))
 
     // console.log(localStorage.getItem('test'), '<< test local storage item')
-    alert(JSON.stringify(localStorage))
+    // alert(JSON.stringify(localStorage))
     // alert(localStorage.getItem('id'))
     
     // console.log(this.current_user, '<< localStorage current user')
