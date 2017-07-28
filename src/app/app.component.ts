@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 
   createMarker() {
     // alert(this.current_user)
-    this.client.pick({ fromSources: ['local_file_system', 'webcam'], accept: 'image/*'}).then((result) => {
+    this.client.pick({ fromSources: ['local_file_system', 'webcam'], accept: 'image/*' }).then((result) => {
       console.log(result, 'success')
       console.log(result.filesUploaded[0].url)
       this.marker_url = result.filesUploaded[0].url;
@@ -83,14 +83,14 @@ export class AppComponent implements OnInit {
     // })
 
     function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
     this.current_user = getParameterByName('userid', undefined)
     this.current_lat = getParameterByName('currlat', undefined)
@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
     // console.log(localStorage.getItem('test'), '<< test local storage item')
     // alert(JSON.stringify(localStorage))
     // alert(localStorage.getItem('id'))
-    
+
     // console.log(this.current_user, '<< localStorage current user')
     // navigator.geolocation.getCurrentPosition(
     //   function (position) {
@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
       console.log('beginning upload...');
       console.log({ marker: this.marker_url, added_art: this.added_art_url });
       this.http
-        .post('http://52.15.90.163:3002/api/marker/markers/' + this.current_user, { image_url: this.marker_url, latitude:  this.current_lat, longitude: this.current_lng})
+        .post('http://52.15.90.163:3002/api/marker/markers/' + this.current_user, { image_url: this.marker_url, latitude: this.current_lat, longitude: this.current_lng })
         .subscribe((res) => {
           console.log(res, 'successfully created marker to mongo db...');
           // adding marker to wikitude manager
@@ -170,8 +170,8 @@ export class AppComponent implements OnInit {
                 }, err => {
                   console.log(err, 'error')
                 })
-                setTimeout(() =>  window.location.href = 'http://www.lewisbracey.com', 2000)
-               
+                setTimeout(() => window.location.href = 'http://52.15.90.163:3002', 2000)
+                // setTimeout(() => document.location.href = 'http://www.lewisbracey.com', 2000)
               })
 
           }, err => {
@@ -191,7 +191,7 @@ export class AppComponent implements OnInit {
   }
 
   goBack() {
-    setTimeout(() =>  window.location.href = 'http://www.lewisbracey.com', 2000)
+    setTimeout(() => window.location.href = 'http://www.lewisbracey.com', 2000)
   }
 
 
