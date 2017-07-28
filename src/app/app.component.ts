@@ -171,7 +171,8 @@ export class AppComponent implements OnInit {
                   console.log(err, 'error')
                 })
                 // setTimeout(() => window.location.href = 'http://52.15.90.163:3002', 2000)
-                setTimeout(() => document.location.href = 'http://www.lewisbracey.com', 2000)
+                // setTimeout(() => document.location.href = 'http://www.lewisbracey.com', 2000)
+                setTimeout(() => window.location.href = 'http://www.lewisbracey.com', 2000)
               })
 
           }, err => {
@@ -190,10 +191,10 @@ export class AppComponent implements OnInit {
 
   }
 
-  goBack() {
-    // setTimeout(() => window.location.href = 'http://52.15.90.163:3002', 2000)
-    setTimeout(() => document.location.href = 'http://www.lewisbracey.com', 2000)
-  }
+  // goBack() {
+  //   // setTimeout(() => window.location.href = 'http://52.15.90.163:3002', 2000)
+  //   setTimeout(() => document.location.href = 'http://www.lewisbracey.com', 2000)
+  // }
 
 
 }
