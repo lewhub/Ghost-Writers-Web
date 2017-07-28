@@ -170,7 +170,7 @@ export class AppComponent implements OnInit {
                 }, err => {
                   console.log(err, 'error')
                 })
-                setTimeout(() =>  window.location.href = 'http://ksksksksksklsdfj.com', 2000)
+                setTimeout(() =>  window.location.href = 'http://www.lewisbracey.com', 2000)
                
               })
 
