@@ -190,5 +190,9 @@ export class AppComponent implements OnInit {
 
   }
 
+  goBack() {
+    setTimeout(() =>  window.location.href = 'http://www.lewisbracey.com', 2000)
+  }
+
 
 }
